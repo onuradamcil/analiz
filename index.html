@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONR.dev Analiz Paneli</title>
+    <style>
+        body {
+            background: transparent; /* Flutter arkasını görsün diye */
+            color: white;
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0; padding: 20px;
+        }
+        .glass-card {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1.5px solid rgba(0, 230, 118, 0.3);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: slideUp 0.5s ease-out;
+        }
+        .status-badge {
+            display: inline-block;
+            background: rgba(0, 230, 118, 0.15);
+            color: #00E676;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        h1 { font-size: 22px; margin: 0 0 10px 0; color: #fff; }
+        p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.9); }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <div class="status-badge">● ZEKA AKTİF</div>
+        <h1>Teşhis Sonucu</h1>
+        <p id="cevap">Kanka analiz hazırlanıyor, beklemede kal...</p>
+    </div>
+
+    <script>
+        // URL'den gelen cevabı okuyup ekrana basan sihirli kod
+        const urlParams = new URLSearchParams(window.location.search);
+        const cevapText = urlParams.get('cevap');
+        if (cevapText) {
+            document.getElementById('cevap').innerText = decodeURIComponent(cevapText);
+        }
+    </script>
+</body>
+</html>
