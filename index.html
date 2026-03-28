@@ -62,5 +62,19 @@
             }
         };
     </script>
+    <script>
+    window.onload = function() {
+        // 1. URL'deki arama parametrelerini tara
+        const params = new URLSearchParams(window.location.search);
+        // 2. 'cevap' anahtarına karşılık gelen değeri al
+        const analizSonucu = params.get('cevap');
+
+        if (analizSonucu) {
+            // 3. Ekranda ilgili ID'ye sahip yere yazdır
+            // Not: HTML içinde id="gemini-cevap" olan bir elementin olmalı kanka
+            document.getElementById('gemini-cevap').innerHTML = decodeURIComponent(analizSonucu);
+        }
+    };
+</script>
 </body>
 </html>
