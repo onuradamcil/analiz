@@ -3,56 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONR.dev Analiz Paneli</title>
+    <title>ONR.dev Analiz Raporu</title>
     <style>
+        /* S24 Ultra ve diğer cihazlara uygun, mobil dostu tasarım */
         body {
-            background: transparent; /* Flutter arkasını görsün diye */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0A192F; /* Uygulamanın arka plan rengiyle aynı */
             color: white;
-            font-family: 'Inter', -apple-system, sans-serif;
-            margin: 0; padding: 20px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Sonuçlar üste hizalı kalsın */
+            height: 100vh;
         }
-        .glass-card {
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1.5px solid rgba(0, 230, 118, 0.3);
-            border-radius: 25px;
+        #result-container {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05); /* Glassmorphism etkisi */
             padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: slideUp 0.5s ease-out;
+            line-height: 1.6;
         }
-        .status-badge {
-            display: inline-block;
-            background: rgba(0, 230, 118, 0.15);
-            color: #00E676;
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
+        h2 {
+            color: #00E676; /* Neon yeşil başlık */
+            margin-top: 0;
+            border-bottom: 2px solid rgba(0, 230, 118, 0.3);
+            padding-bottom: 10px;
         }
-        h1 { font-size: 22px; margin: 0 0 10px 0; color: #fff; }
-        p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.9); }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        p {
+            margin: 0;
+            white-space: pre-wrap; /* Gemini'nin satır başlarını koru */
         }
     </style>
 </head>
 <body>
-    <div class="glass-card">
-        <div class="status-badge">● ZEKA AKTİF</div>
-        <h1>Teşhis Sonucu</h1>
-        <p id="cevap">Kanka analiz hazırlanıyor, beklemede kal...</p>
+    <div id="result-container">
+        <h2>ONR.dev Analiz Raporu</h2>
+        <p id="gemini-cevap">Veri bekleniyor kanka...</p>
     </div>
 
     <script>
-        // URL'den gelen cevabı okuyup ekrana basan sihirli kod
-        const urlParams = new URLSearchParams(window.location.search);
-        const cevapText = urlParams.get('cevap');
-        if (cevapText) {
-            document.getElementById('cevap').innerText = decodeURIComponent(cevapText);
-        }
+        // --- BU KISIM EKSİK OLAN KISIMDIR ---
+        // Sayfa yüklendiğinde URL'deki parametreleri kontrol eden script
+        window.onload = function() {
+            // 1. URL parametrelerini al
+            const urlParams = new URLSearchParams(window.location.search);
+            // 2. 'cevap' parametresini oku
+            const cevap = urlParams.get('cevap');
+
+            // 3. Eğer veri varsa, HTML içindeki 'p' tag'ine yaz
+            if (cevap) {
+                document.getElementById('gemini-cevap').innerText = decodeURIComponent(cevap);
+            } else {
+                document.getElementById('gemini-cevap').innerText = "Hata: Analiz sonucu alınamadı kanka.";
+            }
+        };
     </script>
 </body>
 </html>
